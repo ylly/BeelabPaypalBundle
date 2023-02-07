@@ -1,5 +1,5 @@
 {
-    "name": "beelab/paypal-bundle",
+    "name": "ylly/paypal-bundle",
     "type": "symfony-bundle",
     "description": "Simple bundle for Paypal integration",
     "keywords": [
