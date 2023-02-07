@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": ">=7.1",
         "doctrine/orm": "^2.5",
         "omnipay/paypal": "^3.0",
         "symfony/config": "^3.4 || ^4.4 || ^5.0",
