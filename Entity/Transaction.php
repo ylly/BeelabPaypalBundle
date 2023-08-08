@@ -11,10 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class Transaction
 {
-    const STATUS_KO = -1;
-    const STATUS_STARTED = 0;
-    const STATUS_OK = 1;
-    const STATUS_ERROR = 2;
+    public const STATUS_KO = -1;
+    public const STATUS_STARTED = 0;
+    public const STATUS_OK = 1;
+    public const STATUS_ERROR = 2;
 
     public static $statuses = [
         self::STATUS_STARTED => 'started',
@@ -30,49 +30,58 @@ abstract class Transaction
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    #[ORM\Column(type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    protected int $id;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */
-    protected $start;
+    #[ORM\Column(type: 'datetime')]
+    protected \DateTime $start;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $end;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    protected ?\DateTime $end = null;
 
     /**
      * @var int
      *
      * @ORM\Column(type="smallint", options={"default": 0})
      */
-    protected $status = self::STATUS_STARTED;
+    #[ORM\Column(type: 'smallint', options: ['default' => 0])]
+    protected int $status = self::STATUS_STARTED;
 
     /**
      * @var string
      *
      * @ORM\Column(unique=true)
      */
-    protected $token;
+    #[ORM\Column(unique: true)]
+    protected string $token;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(type="decimal", precision=6, scale=2, options={"default": 0})
      */
-    protected $amount = 0;
+    #[ORM\Column(type: 'decimal', precision: 6, scale: 2, options: ['default' => 0])]
+    protected float $amount = 0;
 
     /**
      * @var array
      *
      * @ORM\Column(type="array")
      */
-    protected $response;
+    #[ORM\Column(type: 'array')]
+    protected array $response;
 
     public function __construct($amount = null)
     {
@@ -123,7 +132,7 @@ abstract class Transaction
 
     public function getStatusLabel(): string
     {
-        return isset(static::$statuses[$this->status]) ? static::$statuses[$this->status] : 'invalid';
+        return static::$statuses[$this->status] ?? 'invalid';
     }
 
     public function setToken(?string $token): self
