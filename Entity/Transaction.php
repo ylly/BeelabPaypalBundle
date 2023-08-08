@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\MappedSuperclass
  */
+#[ORM\MappedSuperclass]
 abstract class Transaction
 {
     public const STATUS_KO = -1;
@@ -70,10 +71,10 @@ abstract class Transaction
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal", precision=6, scale=2, options={"default": 0})
+     * @ORM\Column(type="decimal", precision=6, scale=2, options={"default": "0.00"})
      */
-    #[ORM\Column(type: 'decimal', precision: 6, scale: 2, options: ['default' => 0])]
-    protected float $amount = 0;
+    #[ORM\Column(type: 'decimal', precision: 6, scale: 2, options: ['default' => '0.00'])]
+    protected float $amount = 0.00;
 
     /**
      * @var array
