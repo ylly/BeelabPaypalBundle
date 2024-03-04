@@ -71,9 +71,9 @@ abstract class Transaction
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal", precision=6, scale=2, options={"default": "0.00"})
+     * @ORM\Column(type="float", precision=6, scale=2, options={"default": 0.00})
      */
-    #[ORM\Column(type: 'decimal', precision: 6, scale: 2, options: ['default' => '0.00'])]
+    #[ORM\Column(type: 'float', precision: 6, scale: 2, options: ['default' => 0.00])]
     protected float $amount = 0.00;
 
     /**
@@ -84,7 +84,7 @@ abstract class Transaction
     #[ORM\Column(type: 'array')]
     protected array $response;
 
-    public function __construct($amount = null)
+    public function __construct(?float $amount = null)
     {
         $this->amount = $amount;
         $this->start = new \DateTime();
@@ -148,7 +148,7 @@ abstract class Transaction
         return $this->token;
     }
 
-    public function getAmount(): ?string
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
