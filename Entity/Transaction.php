@@ -25,7 +25,7 @@ abstract class Transaction
     ];
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -34,7 +34,7 @@ abstract class Transaction
     #[ORM\Column(type: 'integer')]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
-    protected int $id;
+    protected ?int $id = null;
 
     /**
      * @var \DateTime
